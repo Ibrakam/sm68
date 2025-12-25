@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users - Social Media 68</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .user-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            text-decoration: none;
+            color: #1c1e21;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 0;
+        }
+
+        .user-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-card:nth-child(2n) .user-avatar {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .user-card:nth-child(3n) .user-avatar {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .user-card:nth-child(4n) .user-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .user-card:nth-child(5n) .user-avatar {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .user-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .user-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1c1e21;
+        }
+
+        .user-username {
+            font-size: 16px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+
+        .user-stats {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+            border-top: 1px solid #e4e6eb;
+            margin-top: 16px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #65676b;
+            margin-top: 4px;
+        }
+
+        .view-profile-btn {
+            margin-top: 20px;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .view-profile-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .online-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #31a24c;
+            border: 3px solid white;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .users-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 20px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Feed</a>
+
+        <div class="header">
+            <h1>Discover People</h1>
+            <p>Find and connect with amazing people in our community</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search users..." id="searchInput">
+        </div>
+
+        <div class="users-grid" id="usersGrid">
+            {% for user in users %}
+            <a href="/{{ user.id }}" class="user-card">
+                <div class="user-avatar">
+                    {{ user.name[0] }}{{ user.surname[0] }}
+                    <div class="online-badge"></div>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">{{ user.name }} {{ user.surname }}</div>
+                    <div class="user-username">@{{ user.username }}</div>
+                    <div class="user-stats">
+                        <div class="stat">
+                            <div class="stat-value">{{ range(50, 500) | random }}</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">{{ range(100, 2000) | random }}</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">{{ range(80, 800) | random }}</div>
+                            <div class="stat-label">Following</div>
+                        </div>
+                    </div>
+                    <button class="view-profile-btn">View Profile</button>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const usersGrid = document.getElementById('usersGrid');
+        const userCards = Array.from(usersGrid.querySelectorAll('.user-card'));
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            userCards.forEach(card => {
+                const name = card.querySelector('.user-name').textContent.toLowerCase();
+                const username = card.querySelector('.user-username').textContent.toLowerCase();
+
+                if (name.includes(searchTerm) || username.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
