@@ -3,14 +3,14 @@ from database.models import Comment
 
 def add_comment_db(uid, post_id, text):
     db = next(get_db())
-    new_comment = Comment(uid=uid, post_id=post_id, text=text)
+    new_comment = Comment(uid=uid, pid=post_id, text=text)
     db.add(new_comment)
     db.commit()
     return True
 
 def get_all_post_comments_db(post_id):
     db = next(get_db())
-    comments = db.query(Comment).filter_by(post_id=post_id).all()
+    comments = db.query(Comment).filter_by(pid=post_id).all()
     return comments
 
 def get_all_user_comments_db(uid):
