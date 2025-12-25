@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media 68</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1877f2;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 50px;
+            background-color: #f0f2f5;
+            font-size: 15px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #1877f2;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #166fe5;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr 300px;
+            gap: 20px;
+        }
+
+        /* Left Sidebar */
+        .sidebar-left {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .user-profile-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-username {
+            color: #65676b;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding-top: 16px;
+            border-top: 1px solid #e4e6eb;
+            margin-top: 16px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1877f2;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #65676b;
+            margin-top: 4px;
+        }
+
+        .menu-item {
+            padding: 12px 16px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #e4e6eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        /* Main Feed */
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .create-post-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-post-input {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .create-post-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 50px;
+            background-color: #f0f2f5;
+            font-size: 15px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e4e6eb;
+        }
+
+        .post-action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: none;
+            color: #65676b;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .post-action-btn:hover {
+            background-color: #f0f2f5;
+        }
+
+        /* Post Card */
+        .post-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .post-author-info {
+            flex: 1;
+        }
+
+        .post-author-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .post-date {
+            color: #65676b;
+            font-size: 13px;
+        }
+
+        .post-menu {
+            color: #65676b;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 4px 8px;
+        }
+
+        .post-content {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background-color: #f0f2f5;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #65676b;
+        }
+
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e4e6eb;
+            color: #65676b;
+            font-size: 14px;
+        }
+
+        .post-interactions {
+            display: flex;
+            gap: 4px;
+            padding-top: 8px;
+        }
+
+        .interaction-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: none;
+            color: #65676b;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .interaction-btn:hover {
+            background-color: #f0f2f5;
+        }
+
+        .interaction-btn.liked {
+            color: #1877f2;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e4e6eb;
+        }
+
+        .comment {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .comment-content {
+            flex: 1;
+            background-color: #f0f2f5;
+            padding: 8px 12px;
+            border-radius: 18px;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .comment-date {
+            color: #65676b;
+            font-size: 12px;
+            margin-left: 44px;
+            margin-top: 4px;
+        }
+
+        .add-comment {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .add-comment input {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 18px;
+            background-color: #f0f2f5;
+            font-size: 14px;
+        }
+
+        /* Right Sidebar */
+        .sidebar-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .widget {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .widget-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #65676b;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .friend-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .friend-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .friend-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .online-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #31a24c;
+            margin-left: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-left,
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none;
+            }
+
+            .header-container {
+                padding: 0 12px;
+            }
+
+            .main-container {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">SM68</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-menu">
+                <button class="btn">Create Post</button>
+                <div class="user-avatar">IK</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div class="user-profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">IK</div>
+                    <div class="profile-name">Ibragim Kadamzanov</div>
+                    <div class="profile-username">@ibragim_kadamzanov</div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-value">245</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">1.2K</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">398</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">&#127968;</div>
+                <span>Home</span>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">&#128101;</div>
+                <span>Friends</span>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">&#128172;</div>
+                <span>Messages</span>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">&#128276;</div>
+                <span>Notifications</span>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-icon">&#9881;</div>
+                <span>Settings</span>
+            </div>
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="feed">
+            <!-- Create Post -->
+            <div class="create-post-card">
+                <div class="create-post-input">
+                    <div class="user-avatar" style="width: 40px; height: 40px; font-size: 16px;">IK</div>
+                    <input type="text" placeholder="What's on your mind, Ibragim?">
+                </div>
+                <div class="post-actions">
+                    <button class="post-action-btn">&#128247; Photo</button>
+                    <button class="post-action-btn">&#127909; Video</button>
+                    <button class="post-action-btn">&#128522; Emoji</button>
+                </div>
+            </div>
+
+            <!-- Post 1 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar">AS</div>
+                    <div class="post-author-info">
+                        <div class="post-author-name">Anna Smirnova</div>
+                        <div class="post-date">2 hours ago</div>
+                    </div>
+                    <div class="post-menu">&#8943;</div>
+                </div>
+                <div class="post-content">
+                    Today is a wonderful day for new beginnings! Just finished my new project. I'm incredibly happy with the results and want to share this joy with you! &#127881;
+                </div>
+                <div class="post-image">
+                    &#128248; Post Image
+                </div>
+                <div class="post-stats">
+                    <span>&#128077; 142 &#183; &#10084; 38</span>
+                    <span>25 comments</span>
+                </div>
+                <div class="post-interactions">
+                    <button class="interaction-btn liked">&#128077; Like</button>
+                    <button class="interaction-btn">&#128172; Comment</button>
+                    <button class="interaction-btn">&#8599; Share</button>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments-section">
+                    <div class="comment">
+                        <div class="comment-avatar">DP</div>
+                        <div class="comment-content">
+                            <div class="comment-author">Dmitry Petrov</div>
+                            <div class="comment-text">Congratulations! Great work! &#128079;</div>
+                        </div>
+                    </div>
+                    <div class="comment-date">1 hour ago</div>
+
+                    <div class="comment">
+                        <div class="comment-avatar">EI</div>
+                        <div class="comment-content">
+                            <div class="comment-author">Elena Ivanova</div>
+                            <div class="comment-text">Super! Very inspiring for new achievements!</div>
+                        </div>
+                    </div>
+                    <div class="comment-date">45 minutes ago</div>
+
+                    <div class="add-comment">
+                        <div class="comment-avatar" style="width: 32px; height: 32px; font-size: 14px;">IK</div>
+                        <input type="text" placeholder="Write a comment...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">MK</div>
+                    <div class="post-author-info">
+                        <div class="post-author-name">Maxim Kuznetsov</div>
+                        <div class="post-date">5 hours ago</div>
+                    </div>
+                    <div class="post-menu">&#8943;</div>
+                </div>
+                <div class="post-content">
+                    Does anyone know good books on web development? I want to deepen my knowledge in this area. I would be grateful for recommendations! &#128218;
+                </div>
+                <div class="post-stats">
+                    <span>&#128077; 67 &#183; &#10084; 12</span>
+                    <span>18 comments</span>
+                </div>
+                <div class="post-interactions">
+                    <button class="interaction-btn">&#128077; Like</button>
+                    <button class="interaction-btn">&#128172; Comment</button>
+                    <button class="interaction-btn">&#8599; Share</button>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments-section">
+                    <div class="comment">
+                        <div class="comment-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">OS</div>
+                        <div class="comment-content">
+                            <div class="comment-author">Olga Sokolova</div>
+                            <div class="comment-text">I recommend "JavaScript: The Good Parts" - great book!</div>
+                        </div>
+                    </div>
+                    <div class="comment-date">4 hours ago</div>
+
+                    <div class="add-comment">
+                        <div class="comment-avatar" style="width: 32px; height: 32px; font-size: 14px;">IK</div>
+                        <input type="text" placeholder="Write a comment...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">VL</div>
+                    <div class="post-author-info">
+                        <div class="post-author-name">Victoria Lebedeva</div>
+                        <div class="post-date">8 hours ago</div>
+                    </div>
+                    <div class="post-menu">&#8943;</div>
+                </div>
+                <div class="post-content">
+                    Sunset on the seashore is one of the most beautiful sights in the world. Sharing with you a moment of harmony and peace. &#127749;
+                </div>
+                <div class="post-image">
+                    &#128248; Sunset Image
+                </div>
+                <div class="post-stats">
+                    <span>&#128077; 289 &#183; &#10084; 156</span>
+                    <span>42 comments</span>
+                </div>
+                <div class="post-interactions">
+                    <button class="interaction-btn">&#128077; Like</button>
+                    <button class="interaction-btn">&#128172; Comment</button>
+                    <button class="interaction-btn">&#8599; Share</button>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments-section">
+                    <div class="comment">
+                        <div class="comment-avatar">AS</div>
+                        <div class="comment-content">
+                            <div class="comment-author">Anna Smirnova</div>
+                            <div class="comment-text">Incredible beauty! &#128525;</div>
+                        </div>
+                    </div>
+                    <div class="comment-date">7 hours ago</div>
+
+                    <div class="comment">
+                        <div class="comment-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">MK</div>
+                        <div class="comment-content">
+                            <div class="comment-author">Maxim Kuznetsov</div>
+                            <div class="comment-text">Where was this taken? I want to go there!</div>
+                        </div>
+                    </div>
+                    <div class="comment-date">6 hours ago</div>
+
+                    <div class="add-comment">
+                        <div class="comment-avatar" style="width: 32px; height: 32px; font-size: 14px;">IK</div>
+                        <input type="text" placeholder="Write a comment...">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <!-- Friends Widget -->
+            <div class="widget">
+                <div class="widget-title">Friends Online</div>
+                <div class="friend-item">
+                    <div class="friend-avatar">AS</div>
+                    <div class="friend-name">Anna Smirnova</div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">MK</div>
+                    <div class="friend-name">Maxim Kuznetsov</div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">OS</div>
+                    <div class="friend-name">Olga Sokolova</div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">VL</div>
+                    <div class="friend-name">Victoria Lebedeva</div>
+                    <div class="online-status"></div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">DP</div>
+                    <div class="friend-name">Dmitry Petrov</div>
+                    <div class="online-status"></div>
+                </div>
+            </div>
+
+            <!-- Suggestions Widget -->
+            <div class="widget">
+                <div class="widget-title">Suggestions</div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">NV</div>
+                    <div class="friend-name">Nikolay Volkov</div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">TM</div>
+                    <div class="friend-name">Tatyana Morozova</div>
+                </div>
+                <div class="friend-item">
+                    <div class="friend-avatar" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">SN</div>
+                    <div class="friend-name">Sergey Novikov</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
